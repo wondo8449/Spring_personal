@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <title>NULL PHOTO</title>
+    <link rel="shortcut icon" href="/image/favicon.ico">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/faq.css">
+</head>
+<body>
+<header th:replace="/index.html :: header">
+</header>
+<div id="FAQ_wrap">
+    <div id="FAQ_inner">
+        <div class="FAQ_title">
+            <h1>F A Q</h1>
+        </div>
+        <!-- Table -->
+        <h3><a class="list button small">목록 보기</a></h3>
+        <div class="content">
+            <div class="form">
+                <form method="get" action="/faq/delete" th:object="${board}">
+                    <div class="fields">
+                        <div class="field">
+                            <h4>번호</h4>
+                            <input type="text" readonly th:field="*{boardNumber}"/>
+                        </div>
+                        <div class="field">
+                            <h4>제목</h4>
+                            <input type="text" readonly th:field="*{boardTitle}"/>
+                        </div>
+                        <div class="field">
+                            <h4>내용</h4>
+                            <textarea rows="6" style="resize:none" readonly th:field="*{boardContent}"></textarea>
+                        </div>
+                        <div class="field">
+                            <h4>작성자</h4>
+                            <input type="text" readonly th:field="*{boardWriter}"/>
+                        </div>
+                    </div>
+                    <ul class="icons">
+                        <li style="display: block">
+                            <span class="icon solid fa-envelope"></span>
+                            <strong>댓글</strong>
+                        </li>
+                    </ul>
+                    <a href="javascript:void(0)" class="register button primary small" style="width: 100%">댓글 등록</a>
+                    <div style="display: none" class="register-form">
+                        <div>
+                            <h4>작성자</h4>
+                            <input type="text" name="replyWriter" placeholder="Replier">
+                        </div>
+                        <div>
+                            <h4>댓글</h4>
+                            <textarea rows="6" name="replyContent" placeholder="Reply" style="resize: none"></textarea>
+                        </div>
+                        <div style="text-align: right">
+                            <a href="javascript:void(0)" class="finish button primary small">등록</a>
+                            <a href="javascript:void(0)" class="cancel button primary small">취소</a>
+                        </div>
+                    </div>
+                    <ul class="replies"></ul>
+                </form>
+                <div class="paging" style="text-align: center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="/index.html :: footer">
+</footer>
+</body>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/reply.js"></script>
+<script th:inline="javascript">
+    let boardNumber = [[${board.boardNumber}]];
+    let queryString = [[${criteria.queryString}]];
+    let check = true;
+    globalThis.page = 1;
+
+    getList();
+    function goUpdate(){
+        location.href = "/faq/update" + queryString + "&boardNumber=" + boardNumber;
+    }
+
+    $("a.list").on("click", function (e){
+        e.preventDefault();
+        location.href = "/faq/list" + queryString;
+    });
+
+    $("a.register").on("click", function(e){
+        e.preventDefault();
+        $(this).hide();
+        $("div.register-form").show();
+    })
+
+    $("a.cancel").on("click", function(e){
+        e.preventDefault();
+        $("div.register-form").hide();
+        $("a.register").show();
+    })
+
+    $("a.finish").on("click", function(e){
+        e.preventDefault();
+        let $replyWriter = $("input[name='replyWriter']");
+        let $replyContent = $("textarea[name='replyContent']");
+
+        replyService.add({
+            replyWriter: $replyWriter.val(),
+            replyContent: $replyContent.val(),
+            boardNumber: boardNumber
+        }, function (){
+            $("div.register-form").hide();
+            $("a.register").show();
+            $replyWriter.val("");
+            $replyContent.val("");
+            getList();
+        });
+    });
+
+    function getList(){
+        replyService.getList({
+            boardNumber : boardNumber,
+            page : globalThis.page
+        }, showList);
+    }
+
+    function showReplyPage(replyCount){
+        let endNumber = Math.ceil(globalThis.page / 10) * 10;
+        let startNumber = endNumber - 9;
+        let realEnd = Math.ceil(replyCount / 10);
+
+        if(endNumber > realEnd){
+            endNumber = realEnd == 0 ? '1' : realEnd;
+        }
+
+        let prev = startNumber > 1;
+        let next = endNumber < realEnd;
+
+        let text = "";
+
+        if(matchMedia("screen and (max-width: 918px)").matches){
+            if(globalThis.page > 1){
+                text += `<a class="changePage" href="` + (globalThis.page - 1) + `"><code><</code></a>`
+            }
+            text += `<code>` + globalThis.page + `</code>`
+            if(globalThis.page < realEnd){
+                text += `<a class="changePage" href="` + (globalThis.page + 1) + `"><code>></code></a>`
+            }
+        }else{
+            if(prev){
+                text += `<a class="changePage" href="` + (startNumber - 1) + `"><code>PREV</code></a>`
+            }
+            for (let i=startNumber; i<=endNumber; i++){
+                if(globalThis.page == i){
+                    text += `<code>` + i + `</code>`
+                    continue;
+                }
+                text += `<a class="changePage" href="` + i + `"><code>` + i + `</code></a>`
+            }
+            if(next){
+                text += `<a class="changePage" href="` + (endNumber + 1) + `"><code>NEXT</code></a>`
+            }
+        }
+        $("div.paging").html(text);
+    }
+
+    $("div.paging").on("click", "a.changePage", function(e){
+        e.preventDefault();
+        globalThis.page = $(this).attr("href");
+        getList();
+    });
+
+    function showList(replyDTO){
+        let text = "";
+        replyDTO.replies.forEach(reply => {
+            text += "<li style='display: block' data-reply-number='" + reply.replyNumber + "'>";
+            text += "<div style='display: flex; justify-content: space-between;'>";
+            text += "<strong style='display:block;'>" + reply.replyWriter + "</strong>";
+            text += "<div>";
+            text += "<a class='modify-ready " + reply.replyNumber + "' style='cursor: pointer;'>수정</a>"
+            text += "<a class='modify " + reply.replyNumber + "' style='display: none; cursor: pointer;'>수정완료</a>"
+            text += "&nbsp;&nbsp;<a class='remove' href='" + reply.replyNumber + "'>삭제</a>"
+            text += "</div>";
+            text += "</div>";
+            text += "<div style='display: flex; justify-content: space-between'>";
+            text += "<p class='replyContent " + reply.replyNumber + "'>" + reply.replyContent + "</p>";
+            text += "<p style='text-align: right;'><strong class='date'>";
+            text += replyService.timeForToday(reply.replyRegisterDate == reply.replyUpdateDate ? reply.replyRegisterDate : reply.replyUpdateDate);
+            text += "</strong></p>";
+            text += "</div>";
+            text += "<div class='line'></div>";
+            text += "</li>";
+        });
+        $("ul.replies").html(text);
+        showReplyPage(replyDTO.replyCount);
+    }
+
+    $("ul.replies").on("click", "a.remove", function(e){
+        e.preventDefault();
+        let replyNumber = $(this).attr("href");
+        replyService.remove(replyNumber, function (){
+            getList();
+        })
+    })
+
+    $("ul.replies").on("click", "a.modify-ready", function (){
+        if(!check){
+            alert("수정중인 댓글이 있습니다.");
+            return;
+        }
+        check = false;
+        let replyNumber = this.classList[1]
+        $("p." + replyNumber).replaceWith("<textarea class='" + replyNumber + "'>" + $("p." + replyNumber).text() + "</textarea>")
+        $(this).next().next().replaceWith("<a class='modify-cancel'>취소</a>")
+        $(this).hide();
+        $(this).next().show();
+    })
+
+    $("ul.replies").on("click", "a.modify-cancel", function (){
+        getList();
+    })
+
+    $("ul.replies").on("click", "a.modify", function (){
+        let replyNumber = this.classList[1];
+        replyService.modify({
+            replyNumber: replyNumber,
+            replyContent: $("textarea." + replyNumber).val()
+        }, function (){
+            getList();
+            check = true;
+        })
+    })
+</script>
+</html>

@@ -1,0 +1,262 @@
+@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&family=Noto+Sans+KR:wght@100..900&family=Orbit&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+body, html {
+    height: 100%;
+}
+
+#menu_bar {
+    font-family: "Hahmlet", serif;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    z-index: 100;
+    padding: 20px 60px 20px 20px;
+    color: #2E3332;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+#menu_bar a {
+    color: #2E3332;
+    text-decoration: none;
+    margin-left: 40px;
+    opacity: 100%;
+}
+
+.logo {
+    margin-left: 20px;
+    font-size: 24px;
+}
+
+#section1 {
+    position: sticky;
+    height: 100%;
+    overflow: hidden;
+}
+
+#slide_container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.slide {
+    min-width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+#slide_text {
+    position: sticky;
+    top: 50%;
+    z-index: 1000;
+    padding: 20px;
+    color: white;
+    text-align: center;
+}
+
+#section2 {
+    width: 100%;
+    height: 1900px;
+    background-image: url(../image/main.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+#content1 {
+    width: 100%;
+    height: 800px;
+    background-color: #FFF;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    display: flex;
+}
+
+#content1 .content1_box {
+    width: 600px;
+    height: 600px;
+    background-color: #2E3332;
+    margin: 0 50px;
+    color: #FFF;
+}
+
+#content1 .content1_box img {
+    width: 100%;
+    height: 60%;
+    object-fit: cover;
+}
+
+#content1 .content1_box .box_text {
+    padding: 50px 130px;
+}
+
+#content2 {
+    width: 100%;
+    height: 300px;
+    background-color: transparent;
+    text-align: center;
+    color: #FFF;
+    padding: 120px 400px 0px 400px;
+}
+
+#content3 {
+    width: 100%;
+    height : 800px;
+    background-color: #FFF;
+    text-align: center;
+}
+
+#footer {
+    width: 100%;
+    height: 100px;
+    padding: 30px;
+    background-color: #2E3332;
+    text-align: center;
+    color: #FFF;
+}
+
+#FAQ_wrap {
+    width: 100%;
+    height: 2000px;
+    background-image: url(../image/about.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    margin: auto 0;
+    display: flex;
+}
+
+#FAQ_wrap #FAQ_inner {
+    width: 90%;
+    height: 70%;
+    background-color: white;
+    text-align: center;
+    padding: 100px 100px;
+}
+
+#FAQ_wrap #FAQ_inner .FAQ_title {
+    font-size: 2.5em;
+}
+
+#FAQ_wrap #FAQ_inner h3 {
+    text-align: right;
+}
+
+#FAQ_wrap #FAQ_inner h3 a {
+    text-decoration: none;
+}
+
+#FAQ_wrap #FAQ_inner h3 a:hover {
+    color: lightgray;
+    text-decoration: underline;
+}
+
+#FAQ_wrap #FAQ_inner h3 a:link a:visited {
+    color: black;
+}
+
+table {
+    margin: 0 0 2em 0;
+    width: 100%;
+}
+
+    table tbody tr {
+        border: solid 1px;
+        border-left: 0;
+        border-right: 0;
+    }
+
+    table td {
+        padding: 0.75em 0.75em;
+    }
+
+    table th {
+        font-size: 0.9em;
+        font-weight: 500;
+        padding: 0 1.5em 0.75em 1.5em;
+        text-align: center;
+    }
+
+    table thead {
+        border-bottom: solid 2px;
+    }
+
+    table tfoot {
+        border-top: solid 2px;
+    }
+
+    table.alt {
+        border-collapse: separate;
+    }
+
+        table.alt tbody tr td {
+            border: solid 1px;
+            border-left-width: 0;
+            border-top-width: 0;
+        }
+
+            table.alt tbody tr td:first-child {
+                border-left-width: 1px;
+            }
+
+        table.alt tbody tr:first-child td {
+            border-top-width: 1px;
+        }
+
+        table.alt thead {
+            border-bottom: 0;
+        }
+
+        table.alt tfoot {
+            border-top: 0;
+        }
+
+table tbody tr {
+    border-color: rgba(67, 75, 86, 0.25);
+}
+
+    table tbody tr:nth-child(2n + 1) {
+        background-color: rgba(67, 75, 86, 0.05);
+    }
+
+table th {
+    color: black;
+}
+
+table thead {
+    border-bottom-color: rgba(67, 75, 86, 0.25);
+}
+
+table tfoot {
+    border-top-color: rgba(67, 75, 86, 0.25);
+}
+
+table.alt tbody tr td {
+    border-color: rgba(67, 75, 86, 0.25);
+}

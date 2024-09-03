@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dongle&family=Gowun+Dodum&display=swap');
+
+* {
+
+}
+#FAQ_wrap {
+    width: 100%;
+    height: 1900px;
+    background-image: url(../image/about.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    margin: auto 0;
+    display: flex;
+}
+
+#FAQ_wrap #FAQ_inner {
+    font-family: "Gowun Dodum", sans-serif;
+    width: 90%;
+    height: 80%;
+    background-color: white;
+    text-align: center;
+    padding: 100px 100px;
+}
+
+#FAQ_wrap #FAQ_inner .FAQ_title {
+    font-size: 2em;
+}
+
+#FAQ_wrap #FAQ_inner h3 {
+    text-align: right;
+}
+
+#FAQ_wrap #FAQ_inner h3 a {
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+#FAQ_wrap #FAQ_inner h3 a:hover {
+    cursor: pointer;
+    color: lightgray;
+    text-decoration: underline;
+}
+
+#FAQ_wrap #FAQ_inner h3 a:link a:visited {
+    color: black;
+}
+
+#FAQ_wrap #FAQ_inner a{
+    text-decoration: none;
+    color: black;
+}
+
+#FAQ_wrap #FAQ_inner a:hover {
+    cursor: pointer;
+    color: lightgray;
+    text-decoration: underline;
+}
+
+#FAQ_wrap #FAQ_inner a:visited {
+    color: black;
+}
+
+.FAQ_title h1{
+
+}
+
+a .list {
+    border: black;
+}
+
+.fields {
+    text-align: left;
+}
+
+.field {
+    margin: 1.5rem 0 0 0;
+}
+
+.field h4 {
+
+}
+
+input[type="text"]:focus {
+    outline: none;
+}
+
+textarea:focus {
+    outline: none;
+}
+
+
+input[id="boardNumber"] {
+    font-family: "Gowun Dodum", sans-serif;
+    font-size: 1.1rem;
+    width: 80px;
+    padding: 10px 5px;
+    margin: 5px 0;
+    border: none;
+    border-bottom: solid 2px #000000;
+    text-align: center;
+}
+
+input[id="boardTitle"] {
+    font-family: "Gowun Dodum", sans-serif;
+    font-size: 1.1rem;
+    width: 300px;
+    padding: 10px 5px;
+    margin: 5px 0;
+    border: none;
+    border-bottom: solid 2px #000000;
+    text-align: center;
+}
+
+textarea {
+    font-family: "Gowun Dodum", sans-serif;
+    width: 100%;
+    height: 200px;
+    padding: 10px 15px;
+    margin: 5px 0;
+    border: 1px solid black;
+    border-radius: 8px;
+    resize: both;
+    font-size: 1.5rem;
+}
+
+input[id="boardWriter"] {
+    font-family: "Gowun Dodum", sans-serif;
+    font-size: 1.1rem;
+    width: 100px;
+    padding: 10px 5px;
+    margin: 5px 0px 30px 0px;
+    border: none;
+    border-bottom: solid 2px #000000;
+    text-align: center;
+}
+
+.replies {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.line {
+    margin: 5px;
+    border-bottom: 1px solid #000000;
+}
+
+form a {
+    text-decoration: none;
+}
+
+.register {
+    margin: 10px 0;
+}
+
+.paging > code {
+
+    padding: 5px 5px;
+    color: lightgray;
+    border: 1px solid lightgray;
+    border-radius: 8px;
+}
+
+.changePage {
+
+    border: 1px solid black;
+    border-radius: 8px;
+}

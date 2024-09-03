@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0/EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias type="com.example.doongjisnap.domain.vo.BoardVO" alias="boardVO"></typeAlias>
+        <typeAlias type="com.example.doongjisnap.domain.vo.FileVO" alias="fileVO"></typeAlias>
+        <typeAlias type="com.example.doongjisnap.domain.vo.GalleryVO" alias="galleryVO"></typeAlias>
+        <typeAlias type="com.example.doongjisnap.domain.vo.GalleryDTO" alias="galleryDTO"></typeAlias>
+        <typeAlias type="com.example.doongjisnap.domain.vo.ReplyVO" alias="replyVO"></typeAlias>
+    </typeAliases>
+</configuration>

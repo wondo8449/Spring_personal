@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NULL PHOTO</title>
+    <link rel="shortcut icon" href="/image/favicon.ico">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <header th:fragment="header">
+        <div id="menu_bar">
+            <div class="logo">NULL PHOTO</div>
+            <div class="menu">
+              <a href="/index">HOME</a>
+              <a href="about.html">ABOUT</a>
+              <a href="/gallery/list">GALLERY</a>
+              <a href="https://www.instagram.com/null_snap/">INSTAGRAM</a>
+              <a href="/faq/list">FAQ</a>
+            </div>
+        </div>
+    </header>
+    <div id="section1">
+        <div id="slide_container">
+            <div class="slide">
+                <img src="/image/banner1.JPG">
+            </div>
+            <div class="slide">
+                <img src="/image/banner2.JPG">
+            </div>
+            <div class="slide">
+                <img src="/image/banner3.JPG">
+            </div>
+            <div class="slide">
+                <img src="/image/banner4.JPG">
+            </div>
+            <div class="slide">
+                <img src="/image/banner5.JPG">
+            </div>
+            <div class="slide">
+                <img src="/image/banner6.JPG">
+            </div>
+            <div class="slide">
+                <img src="/image/banner7.JPG">
+            </div>
+            <div class="slide">
+                <img src="/image/banner8.JPG">
+            </div>
+            <div class="slide">
+                <img src="/image/banner9.JPG">
+            </div>
+            <div class="slide">
+                <img src="/image/banner1.JPG">
+            </div>
+        </div>
+        <div id="slide_text">
+            <p>기쁜 소식을 전하는 사진가</p>
+            <p>|</p>
+            <h2>HERALD PHOTO</h2>
+          </div>
+    </div>
+    <div id="section2">
+        <div id="content1">
+            <div class="content1_box">
+                <img src="/image/banner10.JPG">
+                <div class="box_text">
+                    <p>about herald photo</p>
+                    </br><hr></br>
+                    <p>herald란 '기쁜 소식을 전하다' 라는 뜻입니다</p>
+                </div>
+            </div>
+            <div class="content1_box">
+                <img src="/image/banner1.JPG">
+                <div class="box_text">
+                    <p>about herald photo</p>
+                    </br><hr></br>
+                    <p>herald란 '기쁜 소식을 전하다' 라는 뜻입니다</p>
+                </div>
+            </div>
+        </div>
+        <div id="content2">
+        I want to convey joy to the world through pictures</br>
+        </br><hr></br>
+        HERALD PHOTO
+        </div>
+        <div id="content3">
+            컨텐츠3
+        </div>
+    </div>
+    <footer>
+        <div id="footer" th:fragment="footer">
+            TEL. 010-9940-8245</br>
+            copyright ⓒ NULL PHOTO all rights reserved.
+        </div>
+    </footer>
+    <script>
+    let currentIndex = 0;
+    const slides = document.querySelectorAll('.slide');
+    const content = document.querySelector('#slide_text');
+    const totalSlides = slides.length;
+
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % (totalSlides + 1); // 슬라이드 개수에 1을 추가하여 맨 뒤에 첫 번째 슬라이드를 추가
+        updateSlide();
+    }
+
+    function updateSlide() {
+        const slideContainer = document.querySelector('#slide_container');
+        slideContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+        // currentIndex가 totalSlides와 같을 때 (즉, 마지막 슬라이드를 넘어 첫 번째 슬라이드로 이동할 때) currentIndex를 0으로 설정하여 처음으로 돌아가게 함
+        if (currentIndex === totalSlides) {
+            currentIndex = 0;
+            slideContainer.style.transition = 'none'; // 애니메이션 없이 바로 이동
+            slideContainer.style.transform = `translateX(0%)`; // 첫 번째 슬라이드로 바로 이동
+            setTimeout(() => {
+                slideContainer.style.transition = ''; // 다음에 슬라이드가 넘어갈 때 애니메이션 적용을 위해 transition을 초기화
+            });
+        }
+    }
+    setInterval(nextSlide, 5000);
+    </script>
+</body>
+</html>
